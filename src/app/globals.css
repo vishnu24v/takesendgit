@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #ff9007;
+  --color-foreground: #ffffff;
+  --color-primary: #ffffff;
+  --color-secondary: #000000;
+  --color-accent: #ffffff;
+}
+
+@layer base {
+  html, body, *, a, button, input, select, textarea, [role="button"] {
+    cursor: none !important;
+  }
+  
+  html, body {
+    background: linear-gradient(90deg, #ffb800 0%, #ffb800 20%, #ff7a00 100%) fixed;
+    @apply text-white overflow-x-hidden;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    transition: color .3s cubic-bezier(.4, .4, .7, .85);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  
+  .luxury-text-gradient {
+    @apply bg-gradient-to-r from-white via-white/80 to-white/50 bg-clip-text text-transparent;
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* Custom Scrollbar for Lenis */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Animated Background Noise */
+.noise-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.05;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("https://res.cloudinary.com/dzvp7p8y7/image/upload/v1691234567/noise_texture_p8y7.png");
+}
+
+/* Custom Cursor Styles */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease-out;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 12s linear infinite;
+  animation-delay: 1s;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.marquee-text-size {
+  font-size: max(12px, 1.389vw);
+}
