@@ -195,18 +195,18 @@ export default function AboutPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsCartOpen(false)}
-              className="fixed inset-0 bg-transparent z-[200]"
+              className="fixed inset-0 bg-transparent z-[250]"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white z-[201] p-6 md:p-12 shadow-2xl flex flex-col border-l-2 border-black"
+              className="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white z-[251] p-6 md:p-12 shadow-2xl flex flex-col border-l-2 border-black"
             >
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="absolute top-4 left-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-50"
+                className="absolute top-4 left-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-[260] cursor-pointer"
               >
                 <X size={28} className="text-black" />
               </button>
@@ -296,24 +296,24 @@ export default function AboutPage() {
         className="relative py-24 md:py-48 flex items-center justify-center overflow-hidden min-h-screen"
       >
         <div className="container mx-auto px-4 relative z-10 flex items-center justify-center">
-          {/* The Large Ellipse Line - Sized 5% smaller as requested */}
-          <div className={`absolute inset-0 rounded-[50%/50%] border-[1.5px] transition-all duration-700 ${isWhiteBg ? 'border-black' : 'border-white'} scale-x-[1.2] scale-y-[1.05] pointer-events-none opacity-100`}></div>
+          {/* The Large Ellipse Line - Sized to touch top and bottom screen edges, 5% hide left/right */}
+          <div className={`absolute inset-0 rounded-[50%/50%] border-[1.5px] transition-all duration-700 ${isWhiteBg ? 'border-black' : 'border-white'} scale-x-[1.3] scale-y-[1.85] pointer-events-none opacity-100`}></div>
 
-          <div className="relative z-20 w-full max-w-7xl px-12 md:px-24">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-32 w-full">
-              {/* Left Side: Exact 4 Lines */}
-              <div className="text-left flex-1 md:pl-10">
+          <div className="relative z-20 w-full max-w-7xl">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 w-full">
+              {/* Left Side: 4 Lines */}
+              <div className="text-left flex-1 md:pl-0">
                 <h3 className={`font-bold uppercase leading-[0.9] tracking-tighter transition-colors duration-700 ${isWhiteBg ? 'text-black' : 'text-white'}`} 
                     style={{ fontSize: 'max(30px, 6.5vw)' }}>
-                  WE MAKE PRODUCTS <br />
+                  <span className="whitespace-nowrap">WE MAKE PRODUCTS</span> <br />
                   TO HELP YOU FEEL <br />
                   GOOD WHILE STILL <br />
                   TASTING <span className="inline-block translate-y-1">👅</span> GOOD.
                 </h3>
               </div>
               
-              {/* Right Side: 5 Lines, Smaller Text, with left margin gap */}
-              <div className="text-left flex-initial md:max-w-[400px] flex items-center md:pl-20">
+              {/* Right Side: Exact 5 Lines */}
+              <div className="text-left flex-initial md:max-w-[400px] flex items-center md:pl-0">
                 <p className={`text-base md:text-[20px] font-medium leading-[1.1] transition-colors duration-700 ${isWhiteBg ? 'text-black' : 'text-white'} opacity-90`}>
                   We hope to BOOST your <br />
                   mood in the process. BOOST <br />
@@ -327,10 +327,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Refined FAQ Section - Ultra Compact & Extra Spread Typography */}
-      <section className="bg-white text-black pt-10 pb-10 px-6">
+      {/* Refined FAQ Section - Balanced Spacing & Thin Typography */}
+      <section className="bg-white text-black pt-16 pb-10 px-6">
         <div className="container mx-auto max-w-7xl">
-           <h2 className="text-6xl md:text-7xl font-black uppercase mb-2 tracking-[0.25em]">
+           <h2 className="text-6xl md:text-7xl font-black uppercase mb-12 tracking-tighter">
              FAQ
            </h2>
 
@@ -343,7 +343,7 @@ export default function AboutPage() {
                       onClick={() => setOpenFaqCategory(isOpen ? null : cat.category)}
                       className="w-full py-1.5 flex items-center justify-between text-left group"
                     >
-                      <span className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em] transition-all">
+                      <span className="text-3xl md:text-4xl font-normal uppercase tracking-tight transition-all">
                         {cat.category}
                       </span>
                       <div className="relative w-10 h-10 flex items-center justify-center">

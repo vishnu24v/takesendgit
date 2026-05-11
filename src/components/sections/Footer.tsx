@@ -68,7 +68,7 @@ export default function Footer() {
           <div className="text-left lg:text-right w-full lg:w-1/4 flex flex-col lg:items-end group">
              <div className="inline-block w-full max-w-sm lg:max-w-none">
                 <p className="font-bold uppercase tracking-widest text-[8px] md:text-[9px] mb-3 opacity-60">Text Us - 24/7 Immunity Consultants</p>
-                <div className="w-full px-6 py-4 border-[1.5px] border-current rounded-xl inline-flex items-center justify-center bg-transparent transition-all hover:bg-current hover:text-white group">
+                <div className="w-full px-6 py-4 border-[1.5px] border-current rounded-xl inline-flex items-center justify-center bg-transparent transition-all">
                    <span className="text-lg md:text-xl font-black tracking-tighter">+1 (917) 540-8641</span>
                 </div>
              </div>

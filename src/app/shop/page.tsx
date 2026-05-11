@@ -164,18 +164,18 @@ export default function ShopPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsCartOpen(false)}
-              className="fixed inset-0 bg-transparent z-[200]"
+              className="fixed inset-0 bg-transparent z-[250]"
             />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white z-[201] p-12 shadow-2xl flex flex-col border-l-2 border-black"
+              className="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white z-[251] p-12 shadow-2xl flex flex-col border-l-2 border-black"
             >
               <button 
                 onClick={() => setIsCartOpen(false)}
-                className="absolute top-4 left-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-50"
+                className="absolute top-4 left-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-[260] cursor-pointer"
               >
                 <X size={28} className="text-black" />
               </button>
@@ -214,7 +214,7 @@ export default function ShopPage() {
             <span className="text-[8px] md:text-[10px] font-normal opacity-80 text-black tracking-widest lowercase">immunity vitamin</span>
          </Link>
          
-         <div className="flex items-center gap-6 md:gap-12 px-6 md:px-10 py-1.5 border-2 border-black rounded-2xl relative z-[210]">
+         <div className="flex items-center gap-6 md:gap-12 px-4 md:px-6 py-1.5 border-2 border-black rounded-2xl relative z-[210]">
             {navLinks.map((link) => {
               const isActive = link.name === 'SHOP';
               return (
@@ -227,7 +227,7 @@ export default function ShopPage() {
                 >
                   <span className="relative z-10 transition-opacity group-hover:opacity-70">{link.name}</span>
                   {isActive && (
-                    <div className="absolute -bottom-1 left-0 w-full h-[4px] bg-black rounded-full" />
+                    <div className="absolute -bottom-1 left-0 w-full h-[2.5px] bg-black rounded-full" />
                   )}
                   <AnimatePresence>
                     {hoveredLink === link.name && !isActive && (
@@ -236,7 +236,7 @@ export default function ShopPage() {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 12, opacity: 0 }}
                         transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                        className="absolute -bottom-1 left-0 w-full h-[4px] bg-black rounded-full"
+                        className="absolute -bottom-1 left-0 w-full h-[2.5px] bg-black rounded-full"
                       />
                     )}
                   </AnimatePresence>
