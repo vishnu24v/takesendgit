@@ -47,6 +47,7 @@ const faqData = [
       },
       {
         q: "When will you be releasing new products?",
+        a: "We’re currently working to release another<br />line. Sign up for our email list here to stay in<br />the loop."
       },
       {
         q: "Does BOOST test on animals?",
@@ -67,11 +68,16 @@ export default function AboutPage() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end start"]
+    offset: ["start end", "end start"]
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest > 0.05) {
+    // latest = 0: section starts entering from bottom
+    // latest = 0.5: section is centered
+    // latest = 1: section has fully scrolled out at the top
+    
+    // Trigger white background when the "WE MAKE PRODUCTS" section starts hiding at the top
+    if (latest > 0.5) {
       setIsWhiteBg(true);
     } else {
       setIsWhiteBg(false);
@@ -99,13 +105,13 @@ export default function AboutPage() {
 
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  // Auto-scroll when category is opened
+  // Auto-scroll when FAQ category is opened
   useEffect(() => {
     if (openFaqCategory) {
       const timer = setTimeout(() => {
-        const element = document.getElementById(`faq-section-${openFaqCategory.toLowerCase()}`);
+        const element = document.getElementById(`faq-${openFaqCategory.toLowerCase()}`);
         if (element) {
-          const headerOffset = 100;
+          const headerOffset = 120; // Space from top
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -114,7 +120,7 @@ export default function AboutPage() {
             behavior: 'smooth'
           });
         }
-      }, 300);
+      }, 400); // Small delay to allow expansion animation to start
       return () => clearTimeout(timer);
     }
   }, [openFaqCategory]);
@@ -253,17 +259,13 @@ export default function AboutPage() {
           </h1>
         </div>
 
-        {/* Floating Gummy Bears - Removed as requested */}
-        <div className="absolute inset-0 z-[15] pointer-events-none overflow-hidden">
-        </div>
-
-        {/* The original 3D Render Restored */}
-        <div className="absolute right-[-2%] bottom-[-75%] w-[38%] max-w-[600px] z-10 pointer-events-none">
+        {/* The original 3D Render - Fixed position */}
+        <div className="absolute right-[-2%] bottom-[-55%] w-[48%] max-w-[700px] z-10 pointer-events-none">
           <motion.img 
             ref={bottleRef}
             src="/boost-3d.png" 
             alt="BOOST Bottle"
-            className="w-full h-auto brightness-110 contrast-110 drop-shadow-[0_0_40px_rgba(255,138,0,0.5)]"
+            className="w-full h-auto brightness-110 contrast-110"
             style={{
               y: useTransform(scrollYProgress, [0, 1], [0, -100])
             }}
@@ -271,71 +273,147 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* WHO WE ARE Section - Adjusted spacing for mobile */}
+      {/* WHO WE ARE Section - Restored to morning state with specific line breaks */}
       <section className="container mx-auto px-6 my-20 md:my-40">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-4">
+        <div className="max-w-4xl text-left">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6">
             Who we are
           </h2>
-          <div className="text-base md:text-lg font-medium leading-tight md:leading-[1.1] opacity-90">
-            <p>BOOST is the first company dedicated to helping</p>
-            <p>you get sick less. Because, honestly, why wait</p>
-            <p>until you’re sick to take care of your health? We</p>
-            <p className="mt-2">consider immunity to be of the utmost </p>
-            <p>importance, and we believe vitamins should work</p>
-            <p className="mt-2">for you…even if you’re not working for them.</p>
-          </div>
+          <p className="text-xl md:text-2xl font-medium leading-[1.1] opacity-90">
+            BOOST is the first company dedicated to helping <br />
+            you get sick less. Because, honestly, why wait <br />
+            until you’re sick to take care of your health? We <br />
+            consider immunity to be of the utmost <br />
+            importance, and we believe vitamins should work <br />
+            for you…even if you’re not working for them.
+          </p>
         </div>
       </section>
 
-      {/* Movement Section (The Circle Section) - Fully Responsive */}
+      {/* Movement Section - Refined Ellipse with exact line breaks */}
       <section
         ref={sectionRef}
-        className="relative py-12 md:py-24 overflow-hidden min-h-[60vh] md:min-h-screen flex items-center"
+        className="relative py-24 md:py-48 flex items-center justify-center overflow-hidden min-h-screen"
       >
-        <div className="container mx-auto px-4 relative z-10 h-full flex items-center justify-center">
-          <div className="relative w-full max-w-[1800px] mx-auto flex items-center justify-center min-h-[40vh] md:min-h-[75vh]">
-            {/* The Flattened Ellipse */}
-            <div className={`absolute inset-0 rounded-[50%/50%] border-[2px] transition-all duration-700 ${isWhiteBg ? 'border-black' : 'border-white'} overflow-hidden scale-x-[1.3] scale-y-[1.2]`}>
-               {/* Content inside circle if needed */}
-            </div>
+        <div className="container mx-auto px-4 relative z-10 flex items-center justify-center">
+          {/* The Large Ellipse Line - Sized 5% smaller as requested */}
+          <div className={`absolute inset-0 rounded-[50%/50%] border-[1.5px] transition-all duration-700 ${isWhiteBg ? 'border-black' : 'border-white'} scale-x-[1.2] scale-y-[1.05] pointer-events-none opacity-100`}></div>
 
-            <div className="text-center relative z-20 px-4">
-               <h3 className={`text-[12vw] md:text-[10vw] font-black uppercase leading-[0.8] mb-8 transition-colors duration-700 ${isWhiteBg ? 'text-black' : 'text-white'}`}>
-                 JOIN THE <br /> MOVEMENT
-               </h3>
-               <button className={`px-10 py-5 border-2 rounded-full font-black text-sm uppercase tracking-widest transition-all duration-700 ${isWhiteBg ? 'border-black text-black hover:bg-black hover:text-white' : 'border-white text-white hover:bg-white hover:text-black'}`}>
-                 GET BOOSTED
-               </button>
+          <div className="relative z-20 w-full max-w-7xl px-12 md:px-24">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-32 w-full">
+              {/* Left Side: Exact 4 Lines */}
+              <div className="text-left flex-1 md:pl-10">
+                <h3 className={`font-bold uppercase leading-[0.9] tracking-tighter transition-colors duration-700 ${isWhiteBg ? 'text-black' : 'text-white'}`} 
+                    style={{ fontSize: 'max(30px, 6.5vw)' }}>
+                  WE MAKE PRODUCTS <br />
+                  TO HELP YOU FEEL <br />
+                  GOOD WHILE STILL <br />
+                  TASTING <span className="inline-block translate-y-1">👅</span> GOOD.
+                </h3>
+              </div>
+              
+              {/* Right Side: 5 Lines, Smaller Text, with left margin gap */}
+              <div className="text-left flex-initial md:max-w-[400px] flex items-center md:pl-20">
+                <p className={`text-base md:text-[20px] font-medium leading-[1.1] transition-colors duration-700 ${isWhiteBg ? 'text-black' : 'text-white'} opacity-90`}>
+                  We hope to BOOST your <br />
+                  mood in the process. BOOST <br />
+                  is not just another brand, it’s <br />
+                  a movement. Your immune <br />
+                  system will thank you later.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="bg-white text-black py-24 px-6">
-        <div className="container mx-auto max-w-6xl">
-           <h2 className="text-6xl md:text-8xl font-black uppercase mb-20 tracking-tighter scale-x-110 origin-left">
-             Common <br /> Questions
+      {/* Refined FAQ Section - Ultra Compact & Extra Spread Typography */}
+      <section className="bg-white text-black pt-10 pb-10 px-6">
+        <div className="container mx-auto max-w-7xl">
+           <h2 className="text-6xl md:text-7xl font-black uppercase mb-2 tracking-[0.25em]">
+             FAQ
            </h2>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t-2 border-black pt-12">
-              {faqData.map((cat) => (
-                <div key={cat.category} id={`faq-section-${cat.category.toLowerCase()}`} className="flex flex-col gap-8">
-                  <h3 className="text-xl font-black uppercase tracking-widest border-b-2 border-black pb-2 inline-block self-start">
-                    {cat.category}
-                  </h3>
-                  <div className="flex flex-col gap-10">
-                    {cat.questions?.map((q, idx) => (
-                      <div key={idx} className="flex flex-col gap-3">
-                         <h4 className="text-lg font-bold uppercase leading-tight">{q.q}</h4>
-                         <p className="text-sm font-medium opacity-80 leading-relaxed" dangerouslySetInnerHTML={{ __html: q.a }} />
+           <div className="border-t-[1px] border-black">
+              {faqData.map((cat) => {
+                const isOpen = openFaqCategory === cat.category;
+                return (
+                  <div key={cat.category} id={`faq-${cat.category.toLowerCase()}`} className="border-b-[1px] border-black">
+                    <button 
+                      onClick={() => setOpenFaqCategory(isOpen ? null : cat.category)}
+                      className="w-full py-1.5 flex items-center justify-between text-left group"
+                    >
+                      <span className="text-3xl md:text-4xl font-bold uppercase tracking-[0.2em] transition-all">
+                        {cat.category}
+                      </span>
+                      <div className="relative w-10 h-10 flex items-center justify-center">
+                        <motion.div
+                          animate={{ rotate: isOpen ? 45 : 0 }}
+                          transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                        >
+                          <Plus size={36} strokeWidth={1} />
+                        </motion.div>
                       </div>
-                    ))}
+                    </button>
+                    
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pb-16 flex flex-col gap-12">
+                            {cat.questions.map((q, idx) => (
+                              <div key={idx} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+                                <div className="text-lg md:text-xl font-normal leading-tight tracking-[0.05em]">
+                                  Q: {q.q}
+                                </div>
+                                <div className="text-lg md:text-xl font-normal leading-tight opacity-90 tracking-[0.05em]">
+                                  <span className="inline-block" dangerouslySetInnerHTML={{ __html: `A: ${q.a}` }} />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              ))}
+                );
+              })}
            </div>
+        </div>
+      </section>
+
+      {/* STAY SICK NOT SICK Section - Resized and Spaced */}
+      <section className="bg-white py-32 flex flex-col items-center justify-center text-black">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center gap-4 text-6xl md:text-[7.2vw] font-black uppercase leading-[0.8] tracking-tighter">
+            STAY SICK <span className="inline-block scale-125">🤙</span>
+          </div>
+          <div className="flex items-center gap-4 text-6xl md:text-[7.2vw] font-black uppercase leading-[0.8] tracking-tighter mt-4">
+            <span className="inline-block scale-125">🤧</span> NOT SICK
+          </div>
+        </div>
+      </section>
+
+      {/* Double Marquee - Exactly like Shop Page */}
+      <section className="py-20 overflow-hidden bg-white">
+        <div className="flex whitespace-nowrap animate-marquee mb-1">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="marquee-text-size font-black text-black uppercase mx-10">
+              • AN IMMUNITY VITAMIN • IT'S LIKE A CONDOM FOR YOUR HEALTH • AN IMMUNITY VITAMIN • FOMO FOR YOUR HEALTH • BECAUSE BEING SICK SUCKS • AN IMMUNITY VITAMIN • DON’T PANIC, TAKE BOOST • BOOST YOUR IMMUNITY
+            </span>
+          ))}
+        </div>
+        <div className="flex whitespace-nowrap animate-marquee-reverse">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="marquee-text-size font-black text-black uppercase mx-10">
+              • AN IMMUNITY VITAMIN • IT'S LIKE A CONDOM FOR YOUR HEALTH • AN IMMUNITY VITAMIN • FOMO FOR YOUR HEALTH • BECAUSE BEING SICK SUCKS • AN IMMUNITY VITAMIN • DON’T PANIC, TAKE BOOST • BOOST YOUR IMMUNITY
+            </span>
+          ))}
         </div>
       </section>
 

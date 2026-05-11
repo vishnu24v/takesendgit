@@ -552,7 +552,7 @@ export default function ShopPage() {
         {/* Double Marquee Section - Directly above GET BOOSTED */}
         <section className="py-8 bg-transparent overflow-hidden">
           {/* Row 1: Right to Left */}
-          <div className="flex whitespace-nowrap animate-marquee mb-2">
+          <div className="flex whitespace-nowrap animate-marquee mb-0.5">
             {[...Array(6)].map((_, i) => (
               <span key={i} className="marquee-text-size font-black text-white uppercase mx-10">
                 • AN IMMUNITY VITAMIN • IT'S LIKE A CONDOM FOR YOUR HEALTH • AN IMMUNITY VITAMIN • FOMO FOR YOUR HEALTH • BECAUSE BEING SICK SUCKS • AN IMMUNITY VITAMIN • DON’T PANIC, TAKE BOOST • BOOST YOUR IMMUNITY

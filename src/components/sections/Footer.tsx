@@ -40,8 +40,8 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Footer Links & Branding */}
-        <div className="flex flex-col lg:flex-row justify-between items-start pt-8 border-t-[1.5px] border-current/20">
+        {/* Footer Links & Branding - Removed border-t */}
+        <div className="flex flex-col lg:flex-row justify-between items-start pt-8">
           
           {/* 1. Logo & Copyright */}
           <div className="flex flex-col mb-12 lg:mb-0 w-full lg:w-1/4">
